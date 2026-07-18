@@ -1,3 +1,26 @@
+/* ---------- FLOATING GOLD DUST BACKGROUND ---------- */
+(function(){
+  const container = document.getElementById('floatingParticles');
+  if (!container) return;
+  const COUNT = window.innerWidth < 640 ? 26 : 42;
+  for (let i = 0; i < COUNT; i++){
+    const dust = document.createElement('div');
+    dust.className = 'dust';
+    const size = 2 + Math.random() * 4;               // 2px - 6px
+    const left = Math.random() * 100;                  // 0% - 100%
+    const drift = (Math.random() * 60 - 30).toFixed(0); // -30px to 30px sideways drift
+    const duration = 10 + Math.random() * 14;           // 10s - 24s to float up
+    const delay = Math.random() * duration;             // stagger start times
+    dust.style.width = size + 'px';
+    dust.style.height = size + 'px';
+    dust.style.left = left + '%';
+    dust.style.setProperty('--drift', drift + 'px');
+    dust.style.animationDuration = duration + 's';
+    dust.style.animationDelay = '-' + delay + 's'; // negative delay = already mid-animation on load
+    container.appendChild(dust);
+  }
+})();
+
 /* ---------- BACKGROUND MUSIC ---------- */
 const bgMusic = document.getElementById('bgMusic');
 const musicToggle = document.getElementById('musicToggle');

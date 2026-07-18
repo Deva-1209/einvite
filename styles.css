@@ -156,6 +156,17 @@
       linear-gradient(180deg, var(--night) 0%, #1c1120 30%, #1c1120 70%, var(--night) 100%);
   }
 
+  /* Shared background image spanning the Save the Date + Couple sections */
+  .date-couple-bg{
+    position:relative;
+    background-image:
+      linear-gradient(180deg, rgba(21,13,22,0.4) 0%, rgba(21,13,22,0.25) 30%, rgba(21,13,22,0.35) 70%, rgba(21,13,22,0.55) 100%),
+      url('images/bg-date.jpg');
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
+  }
+
   /* ================= HERO ================= */
   .hero{
     position:relative;
@@ -167,6 +178,12 @@
     padding:8px 24px 80px;
     text-align:center;
     overflow:hidden;
+    background-image:
+      linear-gradient(180deg, rgba(21,13,22,0.45) 0%, rgba(21,13,22,0.3) 40%, rgba(21,13,22,0.6) 100%),
+      url('images/bg-hero.jpg');
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
   }
   .monogram{width:78px; height:78px; margin:6px auto 18px;}
   .parents-row{
@@ -180,6 +197,11 @@
   }
   .parents-col .names{font-size:19px; color:var(--gold-light); margin:4px 0 2px;}
   .divider-dot{width:1px; align-self:stretch; background:linear-gradient(var(--gold-light), var(--gold), var(--gold-light)); opacity:0.6;}
+  @media (max-width:480px){
+    .parents-row{flex-direction:column; align-items:center; gap:18px;}
+    .parents-col{width:100%; text-align:center;}
+    .divider-dot{width:80px; height:1px; align-self:center; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  }
   .couple-names{
     font-size:clamp(52px, 11vw, 92px); line-height:1.05; color:var(--gold-light);
     margin:18px 0 10px; font-style:italic; font-weight:500;
@@ -245,6 +267,16 @@
   /* ---- VENUE + MAP CARDS ---- */
   .venues{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
   @media (max-width:640px){ .venues{grid-template-columns:1fr;} }
+  #venues{
+    min-height:640px;
+    background-image:
+      linear-gradient(180deg, rgba(21,13,22,0.4) 0%, rgba(21,13,22,0.25) 45%, rgba(21,13,22,0.5) 100%),
+      url('images/bg-venues.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    border-radius:8px;
+  }
   .venue-card{
     background:var(--panel); border:1px solid var(--blush-deep);
     padding:30px 26px 26px; text-align:center; position:relative;
@@ -466,4 +498,35 @@
   @keyframes sparkle-twinkle{
     0%,100%{opacity:0; transform:scale(0.3);}
     50%{opacity:1; transform:scale(1);}
+  }
+
+  /* ================= FLOATING GOLD DUST BACKGROUND ================= */
+  .floating-particles{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:6;
+  }
+  .floating-particles .dust{
+    position:absolute;
+    bottom:-4vh;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--gold-light) 0%, var(--gold) 70%, transparent 100%);
+    box-shadow:0 0 8px 2px rgba(234,210,160,0.65);
+    opacity:0;
+    will-change:transform, opacity;
+    animation-name:dust-float;
+    animation-timing-function:ease-in-out;
+    animation-iteration-count:infinite;
+  }
+  @keyframes dust-float{
+    0%{ transform:translate(0,0) scale(0.5); opacity:0; }
+    12%{ opacity:0.85; }
+    50%{ transform:translate(var(--drift,24px), -55vh) scale(1); opacity:0.6; }
+    88%{ opacity:0.35; }
+    100%{ transform:translate(calc(var(--drift,24px) * 1.8), -108vh) scale(0.4); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .floating-particles{display:none;}
   }
