@@ -156,21 +156,18 @@
       linear-gradient(180deg, var(--night) 0%, #1c1120 30%, #1c1120 70%, var(--night) 100%);
   }
 
-  /* Shared background image spanning the Save the Date + Couple sections */
+  /* Save the Date + Couple sections wrapper (no background image) */
   .date-couple-bg{
     position:relative;
-    background-image:
-      linear-gradient(180deg, rgba(21,13,22,0.4) 0%, rgba(21,13,22,0.25) 30%, rgba(21,13,22,0.35) 70%, rgba(21,13,22,0.55) 100%),
-      url('images/bg-date.jpg');
-    background-size:cover;
-    background-position:center top;
-    background-repeat:no-repeat;
   }
 
   /* ================= HERO ================= */
   .hero{
     position:relative;
-    min-height:100vh;
+    /* Taller than the viewport so the full bg-hero.jpg illustration can show
+       without being cropped top/bottom. Increase/decrease this value to match
+       your image's aspect ratio if it's still getting cut off. */
+    min-height:135vh;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -178,12 +175,18 @@
     padding:8px 24px 80px;
     text-align:center;
     overflow:hidden;
+    background-color:var(--night);
     background-image:
-      linear-gradient(180deg, rgba(21,13,22,0.45) 0%, rgba(21,13,22,0.3) 40%, rgba(21,13,22,0.6) 100%),
+      linear-gradient(180deg, rgba(21,13,22,0.22) 0%, rgba(21,13,22,0.12) 40%, rgba(21,13,22,0.4) 100%),
       url('images/bg-hero.jpg');
-    background-size:cover;
-    background-position:center top;
+    /* contain (instead of cover) guarantees the whole image is visible;
+       any leftover space is filled by the --night background color above */
+    background-size:auto 100%;
+    background-position:center bottom;
     background-repeat:no-repeat;
+  }
+  @media (max-width:640px){
+    .hero{ min-height:150vh; background-size:100% auto; background-position:center bottom; }
   }
   .monogram{width:78px; height:78px; margin:6px auto 18px;}
   .parents-row{
@@ -193,10 +196,16 @@
   .parents-col{flex:1; min-width:190px;}
   .parents-col .who{
     font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.14em;
-    color:var(--ink-soft); text-transform:uppercase; margin-top:4px;
+    color:var(--plum); text-transform:uppercase; margin-top:4px; opacity:0.75;
   }
-  .parents-col .names{font-size:19px; color:var(--gold-light); margin:4px 0 2px;}
+  .parents-col .names{font-size:19px; color:var(--plum); margin:4px 0 2px; font-weight:600;}
   .divider-dot{width:1px; align-self:stretch; background:linear-gradient(var(--gold-light), var(--gold), var(--gold-light)); opacity:0.6;}
+  .hero .eyebrow{color:var(--plum); opacity:0.8;}
+  .hero .couple-names{color:var(--plum); text-shadow:0 1px 12px rgba(255,255,255,0.5);}
+  .hero .amp{color:var(--gold);}
+  .hero .invite-line{color:var(--plum); opacity:0.85;}
+  .hero .ceremony-type{color:var(--gold);}
+  .hero .scroll-cue{color:var(--plum); opacity:0.75;}
   @media (max-width:480px){
     .parents-row{flex-direction:column; align-items:center; gap:18px;}
     .parents-col{width:100%; text-align:center;}
@@ -269,12 +278,7 @@
   @media (max-width:640px){ .venues{grid-template-columns:1fr;} }
   #venues{
     min-height:640px;
-    background-image:
-      linear-gradient(180deg, rgba(21,13,22,0.4) 0%, rgba(21,13,22,0.25) 45%, rgba(21,13,22,0.5) 100%),
-      url('images/bg-venues.jpg');
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background-color:var(--night);
     border-radius:8px;
   }
   .venue-card{
