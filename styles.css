@@ -164,10 +164,7 @@
   /* ================= HERO ================= */
   .hero{
     position:relative;
-    /* Taller than the viewport so the full bg-hero.jpg illustration can show
-       without being cropped top/bottom. Increase/decrease this value to match
-       your image's aspect ratio if it's still getting cut off. */
-    min-height:135vh;
+    min-height:100vh;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -179,14 +176,9 @@
     background-image:
       linear-gradient(180deg, rgba(21,13,22,0.22) 0%, rgba(21,13,22,0.12) 40%, rgba(21,13,22,0.4) 100%),
       url('images/bg-hero.jpg');
-    /* contain (instead of cover) guarantees the whole image is visible;
-       any leftover space is filled by the --night background color above */
-    background-size:auto 100%;
+    background-size:cover;
     background-position:center bottom;
     background-repeat:no-repeat;
-  }
-  @media (max-width:640px){
-    .hero{ min-height:150vh; background-size:100% auto; background-position:center bottom; }
   }
   .monogram{width:78px; height:78px; margin:6px auto 18px;}
   .parents-row{
