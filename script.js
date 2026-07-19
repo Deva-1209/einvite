@@ -142,7 +142,7 @@ function scratch(e){
   ctx.fill();
 }
 
-let flowersLaunched = false;
+let heartsLaunched = false;
 function checkClear(){
   const data = ctx.getImageData(0,0,canvas.width,canvas.height).data;
   let transparent = 0;
@@ -152,58 +152,51 @@ function checkClear(){
     canvas.style.transition = 'opacity .6s ease';
     canvas.style.opacity = '0';
     setTimeout(()=> canvas.style.display='none', 600);
-    if(!flowersLaunched){
-      flowersLaunched = true;
-      launchFlowers();
+    if(!heartsLaunched){
+      heartsLaunched = true;
+      launchHearts();
     }
   }
 }
 
-/* ---------- FALLING FLOWERS (on scratch reveal) ---------- */
-const FLOWER_SVG = `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(20,20)">
-    <ellipse class="petal" cx="0" cy="-11" rx="6" ry="9"/>
-    <ellipse class="petal" cx="0" cy="-11" rx="6" ry="9" transform="rotate(72)"/>
-    <ellipse class="petal" cx="0" cy="-11" rx="6" ry="9" transform="rotate(144)"/>
-    <ellipse class="petal" cx="0" cy="-11" rx="6" ry="9" transform="rotate(216)"/>
-    <ellipse class="petal" cx="0" cy="-11" rx="6" ry="9" transform="rotate(288)"/>
-    <circle class="center" r="4"/>
-  </g>
+/* ---------- FALLING HEARTS (on scratch reveal) ---------- */
+const HEART_SVG = `<svg viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg">
+  <path class="heart-shape" d="M16 26 C4 17, -2 9, 3 3.5 C7 -1, 14 0.5, 16 6 C18 0.5, 25 -1, 29 3.5 C34 9, 28 17, 16 26 Z"/>
 </svg>`;
 
-function launchFlowers(){
-  const petalColors = ['var(--gold-light)', 'var(--mauve)', 'var(--ivory)', 'var(--gold)'];
-  const centerColors = ['var(--gold)', 'var(--plum)'];
+function launchHearts(){
+  const colors = ['var(--gold-light)', 'var(--mauve)', 'var(--gold)', 'var(--ivory)'];
   const count = window.innerWidth < 640 ? 16 : 26;
 
   for (let i = 0; i < count; i++){
-    const flower = document.createElement('div');
-    flower.className = 'petal-fall';
-    flower.innerHTML = FLOWER_SVG;
+    const heart = document.createElement('div');
+    heart.className = 'heart-fall';
+    heart.innerHTML = HEART_SVG;
 
-    const size = 12 + Math.random() * 18;               // 12px - 30px blooms
-    const startX = Math.random() * 100;                  // 0% - 100% across viewport
-    const midX = (Math.random() * 60 - 30).toFixed(0);    // sideways sway on the way down
+    const size = 12 + Math.random() * 18;                 // 12px - 30px hearts
+    const startX = Math.random() * 100;                    // 0% - 100% across viewport
+    const midX = (Math.random() * 60 - 30).toFixed(0);      // sideways sway on the way down
     const endX = (parseFloat(midX) + (Math.random() * 60 - 30)).toFixed(0);
+    const rot = (Math.random() * 40 - 20).toFixed(0);
+    const rot2 = (Math.random() * 40 - 20).toFixed(0);
     const duration = 3.2 + Math.random() * 2.6;
     const delay = Math.random() * 1.4;
-    const petalColor = petalColors[Math.floor(Math.random() * petalColors.length)];
-    const centerColor = centerColors[Math.floor(Math.random() * centerColors.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
 
-    flower.style.left = startX + '%';
-    flower.style.width = size + 'px';
-    flower.style.height = size + 'px';
-    flower.style.setProperty('--midx', midX + 'px');
-    flower.style.setProperty('--endx', endX + 'px');
-    flower.style.animationDuration = duration + 's';
-    flower.style.animationDelay = delay + 's';
-    flower.querySelectorAll('svg .petal').forEach(p => p.setAttribute('fill', petalColor));
-    flower.querySelector('svg .center').setAttribute('fill', centerColor);
-    flower.querySelector('svg').style.animationDuration = (2.4 + Math.random() * 2) + 's';
-    flower.querySelector('svg').style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
+    heart.style.left = startX + '%';
+    heart.style.width = size + 'px';
+    heart.style.height = size + 'px';
+    heart.style.setProperty('--midx', midX + 'px');
+    heart.style.setProperty('--endx', endX + 'px');
+    heart.style.setProperty('--rot', rot + 'deg');
+    heart.style.setProperty('--rot2', rot2 + 'deg');
+    heart.style.animationDuration = duration + 's';
+    heart.style.animationDelay = delay + 's';
+    heart.querySelector('svg .heart-shape').setAttribute('fill', color);
+    heart.querySelector('svg').style.animationDuration = (0.8 + Math.random() * 0.7) + 's';
 
-    document.body.appendChild(flower);
-    setTimeout(() => flower.remove(), (duration + delay + 0.5) * 1000);
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), (duration + delay + 0.5) * 1000);
   }
 }
 

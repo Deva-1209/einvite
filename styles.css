@@ -146,34 +146,34 @@
     to{ transform:translateY(110vh) rotate(540deg); opacity:0.2; }
   }
 
-  /* flower petals falling after scratch card reveal */
-  .petal-fall{
+  /* hearts falling after scratch card reveal */
+  .heart-fall{
     position:fixed;
     top:-40px;
     z-index:900;
     pointer-events:none;
     opacity:0;
-    animation-name:petal-path;
+    animation-name:heart-path;
     animation-timing-function:ease-in-out;
     animation-fill-mode:forwards;
   }
-  .petal-fall svg{
+  .heart-fall svg{
     display:block;
     width:100%;
     height:100%;
-    animation:petal-spin 3.2s linear infinite;
+    animation:heart-beat 1.1s ease-in-out infinite;
     transform-origin:center;
   }
-  @keyframes petal-spin{
-    0%{ transform:rotate(0deg); }
-    100%{ transform:rotate(360deg); }
+  @keyframes heart-beat{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.15); }
   }
-  @keyframes petal-path{
-    0%{ opacity:0; transform:translate(0,0); }
+  @keyframes heart-path{
+    0%{ opacity:0; transform:translate(0,0) rotate(0deg); }
     8%{ opacity:0.95; }
-    50%{ transform:translate(var(--midx, 20px), 55vh); }
+    50%{ transform:translate(var(--midx, 20px), 55vh) rotate(var(--rot, 20deg)); }
     88%{ opacity:0.9; }
-    100%{ opacity:0; transform:translate(var(--endx, -20px), 112vh); }
+    100%{ opacity:0; transform:translate(var(--endx, -20px), 112vh) rotate(var(--rot2, -20deg)); }
   }
 
   /* ================= AMBIENT PAGE ================= */
