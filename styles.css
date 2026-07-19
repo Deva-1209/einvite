@@ -146,34 +146,34 @@
     to{ transform:translateY(110vh) rotate(540deg); opacity:0.2; }
   }
 
-  /* birds flying up after scratch card reveal */
-  .bird-fly{
+  /* flower petals falling after scratch card reveal */
+  .petal-fall{
     position:fixed;
-    bottom:-40px;
+    top:-40px;
     z-index:900;
     pointer-events:none;
     opacity:0;
-    animation-name:bird-path;
+    animation-name:petal-path;
     animation-timing-function:ease-in-out;
     animation-fill-mode:forwards;
   }
-  .bird-fly svg{
+  .petal-fall svg{
     display:block;
     width:100%;
     height:100%;
-    animation:bird-flap 0.5s ease-in-out infinite;
+    animation:petal-spin 3.2s linear infinite;
     transform-origin:center;
   }
-  @keyframes bird-flap{
-    0%,100%{ transform:scaleY(1); }
-    50%{ transform:scaleY(0.55); }
+  @keyframes petal-spin{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
   }
-  @keyframes bird-path{
-    0%{ opacity:0; transform:translate(0,0) rotate(var(--tilt, -8deg)); }
-    8%{ opacity:0.9; }
-    50%{ transform:translate(var(--midx, 40vw), -55vh) rotate(var(--tilt, -8deg)); }
-    85%{ opacity:0.85; }
-    100%{ opacity:0; transform:translate(var(--endx, 85vw), -115vh) rotate(var(--tilt, -8deg)); }
+  @keyframes petal-path{
+    0%{ opacity:0; transform:translate(0,0); }
+    8%{ opacity:0.95; }
+    50%{ transform:translate(var(--midx, 20px), 55vh); }
+    88%{ opacity:0.9; }
+    100%{ opacity:0; transform:translate(var(--endx, -20px), 112vh); }
   }
 
   /* ================= AMBIENT PAGE ================= */
