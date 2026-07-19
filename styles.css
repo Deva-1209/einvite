@@ -146,6 +146,36 @@
     to{ transform:translateY(110vh) rotate(540deg); opacity:0.2; }
   }
 
+  /* birds flying up after scratch card reveal */
+  .bird-fly{
+    position:fixed;
+    bottom:-40px;
+    z-index:900;
+    pointer-events:none;
+    opacity:0;
+    animation-name:bird-path;
+    animation-timing-function:ease-in-out;
+    animation-fill-mode:forwards;
+  }
+  .bird-fly svg{
+    display:block;
+    width:100%;
+    height:100%;
+    animation:bird-flap 0.5s ease-in-out infinite;
+    transform-origin:center;
+  }
+  @keyframes bird-flap{
+    0%,100%{ transform:scaleY(1); }
+    50%{ transform:scaleY(0.55); }
+  }
+  @keyframes bird-path{
+    0%{ opacity:0; transform:translate(0,0) rotate(var(--tilt, -8deg)); }
+    8%{ opacity:0.9; }
+    50%{ transform:translate(var(--midx, 40vw), -55vh) rotate(var(--tilt, -8deg)); }
+    85%{ opacity:0.85; }
+    100%{ opacity:0; transform:translate(var(--endx, 85vw), -115vh) rotate(var(--tilt, -8deg)); }
+  }
+
   /* ================= AMBIENT PAGE ================= */
   .page{
     position:relative;

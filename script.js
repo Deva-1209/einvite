@@ -142,6 +142,7 @@ function scratch(e){
   ctx.fill();
 }
 
+let birdsLaunched = false;
 function checkClear(){
   const data = ctx.getImageData(0,0,canvas.width,canvas.height).data;
   let transparent = 0;
@@ -151,6 +152,49 @@ function checkClear(){
     canvas.style.transition = 'opacity .6s ease';
     canvas.style.opacity = '0';
     setTimeout(()=> canvas.style.display='none', 600);
+    if(!birdsLaunched){
+      birdsLaunched = true;
+      launchBirds();
+    }
+  }
+}
+
+/* ---------- FLYING BIRDS (on scratch reveal) ---------- */
+const BIRD_SVG = `<svg viewBox="0 0 60 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 12 C 10 -4, 20 -4, 30 8 C 40 -4, 50 -4, 60 12 C 50 6, 40 6, 30 14 C 20 6, 10 6, 0 12 Z"
+    fill="var(--gold-light)"/>
+</svg>`;
+
+function launchBirds(){
+  const colors = ['var(--gold-light)', 'var(--gold)', 'var(--ivory)'];
+  const count = window.innerWidth < 640 ? 7 : 11;
+  for (let i = 0; i < count; i++){
+    const bird = document.createElement('div');
+    bird.className = 'bird-fly';
+    bird.innerHTML = BIRD_SVG;
+
+    const size = 18 + Math.random() * 22;              // 18px - 40px wingspan
+    const startX = 10 + Math.random() * 80;             // 10% - 90% across viewport
+    const midX = (Math.random() * 50 - 25).toFixed(0);  // drift left/right as they climb
+    const endX = (parseFloat(midX) + (Math.random() * 40 - 20)).toFixed(0);
+    const tilt = (Math.random() * 16 - 8).toFixed(1);
+    const duration = 3.4 + Math.random() * 2.2;
+    const delay = Math.random() * 1.2;
+    const fillColor = colors[Math.floor(Math.random() * colors.length)];
+
+    bird.style.left = startX + '%';
+    bird.style.width = size + 'px';
+    bird.style.height = (size * 0.4) + 'px';
+    bird.style.setProperty('--midx', midX + 'vw');
+    bird.style.setProperty('--endx', endX + 'vw');
+    bird.style.setProperty('--tilt', tilt + 'deg');
+    bird.style.animationDuration = duration + 's';
+    bird.style.animationDelay = delay + 's';
+    bird.querySelector('svg path').setAttribute('fill', fillColor);
+    bird.querySelector('svg').style.animationDuration = (0.35 + Math.random() * 0.25) + 's';
+
+    document.body.appendChild(bird);
+    setTimeout(() => bird.remove(), (duration + delay + 0.5) * 1000);
   }
 }
 
