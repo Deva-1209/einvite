@@ -102,38 +102,6 @@
     letter-spacing:0.05em;
   }
 
-  /* pom pom garland on doors */
-  .pompom-garland{
-    position:absolute; top:0; left:0; right:0;
-    display:flex; justify-content:space-evenly;
-    padding-top:0;
-    pointer-events:none;
-    z-index:6;
-  }
-  .pompom{
-    width:26px; height:26px;
-    border-radius:50%;
-    margin-top:-4px;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), transparent 40%),
-      var(--pc, var(--gold-light));
-    box-shadow:0 0 0 2px rgba(0,0,0,0.05) inset;
-    filter:drop-shadow(0 3px 3px rgba(0,0,0,0.25));
-    animation:swing 3.2s ease-in-out infinite;
-    transform-origin:top center;
-  }
-  .pompom::after{
-    content:"";
-    position:absolute; top:-10px; left:50%; width:1px; height:10px;
-    background:rgba(216,180,140,0.6);
-  }
-  .pompom:nth-child(odd){animation-delay:.4s;}
-  .pompom:nth-child(3n){animation-delay:.9s;}
-  @keyframes swing{
-    0%,100%{transform:rotate(-6deg);}
-    50%{transform:rotate(6deg);}
-  }
-
   /* confetti burst */
   .confetti-piece{
     position:fixed; top:-20px; z-index:1000;
@@ -424,19 +392,26 @@
     margin-bottom:16px;
   }
   .gallery-scroll{
-    display:flex;
-    gap:16px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
+    overflow:hidden;
     padding:4px 24px 18px;
     margin:0 -24px;
-    scrollbar-width:thin;
-    scrollbar-color:var(--gold) transparent;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
   }
-  .gallery-scroll::-webkit-scrollbar{height:5px;}
-  .gallery-scroll::-webkit-scrollbar-thumb{background:var(--gold-light); border-radius:4px;}
-  .gallery-scroll::-webkit-scrollbar-track{background:transparent;}
+  .gallery-track{
+    display:flex;
+    gap:16px;
+    width:max-content;
+    animation:gallery-marquee 26s linear infinite;
+  }
+  .gallery-scroll:hover .gallery-track,
+  .gallery-scroll:active .gallery-track{
+    animation-play-state:paused;
+  }
+  @keyframes gallery-marquee{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
   .gallery-item{
     flex:0 0 auto;
     width:260px;

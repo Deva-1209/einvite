@@ -36,11 +36,6 @@
   <!-- ============ DOOR INTRO ============ -->
   <div id="doorIntro">
     <div class="door door-left">
-      <div class="pompom-garland">
-        <div class="pompom" style="--pc:var(--gold-light)"></div>
-        <div class="pompom" style="--pc:var(--mauve)"></div>
-        <div class="pompom" style="--pc:var(--gold)"></div>
-      </div>
       <div class="door-panel">
         <svg class="door-carving" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" fill="none">
           <!-- top finial -->
@@ -67,11 +62,6 @@
       </div>
     </div>
     <div class="door door-right">
-      <div class="pompom-garland">
-        <div class="pompom" style="--pc:var(--gold)"></div>
-        <div class="pompom" style="--pc:var(--mauve)"></div>
-        <div class="pompom" style="--pc:var(--gold-light)"></div>
-      </div>
       <div class="door-panel">
         <svg class="door-carving" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" fill="none">
           <!-- top finial -->
@@ -198,25 +188,43 @@
           </div>
         </div>
 
-        <!-- ============ MOMENTS GALLERY (horizontally scrollable) ============ -->
+        <!-- ============ MOMENTS GALLERY (auto-scrolling) ============ -->
         <!-- Drop 5 photos in this folder named moment-1.jpg through moment-5.jpg -->
         <div class="gallery-block">
-          <p class="gallery-label">Swipe to see more →</p>
+          <p class="gallery-label">A few of our favorite moments</p>
           <div class="gallery-scroll">
-            <div class="gallery-item">
-              <img src="moment-1.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
-            </div>
-            <div class="gallery-item">
-              <img src="moment-2.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
-            </div>
-            <div class="gallery-item">
-              <img src="moment-3.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
-            </div>
-            <div class="gallery-item">
-              <img src="moment-4.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
-            </div>
-            <div class="gallery-item">
-              <img src="moment-5.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
+            <div class="gallery-track">
+              <div class="gallery-item">
+                <img src="moment-1.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item">
+                <img src="moment-2.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item">
+                <img src="moment-3.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item">
+                <img src="moment-4.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item">
+                <img src="moment-5.jpg" alt="A moment together" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <!-- duplicate set for a seamless infinite loop -->
+              <div class="gallery-item" aria-hidden="true">
+                <img src="moment-1.jpg" alt="" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item" aria-hidden="true">
+                <img src="moment-2.jpg" alt="" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item" aria-hidden="true">
+                <img src="moment-3.jpg" alt="" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item" aria-hidden="true">
+                <img src="moment-4.jpg" alt="" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
+              <div class="gallery-item" aria-hidden="true">
+                <img src="moment-5.jpg" alt="" onerror="this.parentElement.classList.add('no-photo')">
+              </div>
             </div>
           </div>
         </div>
